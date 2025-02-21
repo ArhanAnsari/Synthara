@@ -6,9 +6,24 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Next.js Chatbot Template',
-  description: 'Next.js chatbot template using the AI SDK.',
+  metadataBase: new URL('https://auroraai.vercel.app'),
+  title: "AuroraAI | Next.js-Powered AI Assistant",  
+  description: "Illuminate your ideas with AuroraAI—a modern, Next.js chatbot blending AI brilliance and Northern Lights elegance.",  
+  keywords: ["AI Assistant", "Next.js Chatbot", "Northern Lights AI", "Real-time AI", "Vercel", "React"],  
+  openGraph: {  
+    title: "AuroraAI: Conversations as Bright as the Aurora",  
+    description: "A Next.js 15 chatbot inspired by the Northern Lights—fast, intuitive, and endlessly helpful.",  
+    images: [{ url: "/opengraph-image.png" }], // Suggest aurora-themed visuals  
+    url: "https://auroraai.vercel.app"  
+  },  
+  twitter: {  
+    card: "summary_large_image",  
+    title: "Meet AuroraAI: Your Luminous Next.js Assistant",  
+    description: "Powered by Next.js, glowing with intelligence. ✨",  
+    images: ["https://https://auroraai.vercel.app/twitter-image.png"]  
+  },
+  themeColor: "#4f46e5", // Deep indigo (aurora-inspired)  
+  viewport: "width=device-width, initial-scale=1"  
 };
 
 export const viewport = {
