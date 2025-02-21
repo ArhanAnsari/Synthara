@@ -1,4 +1,5 @@
 import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { fireworks } from '@ai-sdk/fireworks';
 import {
   customProvider,
@@ -10,14 +11,14 @@ export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
 
 export const myProvider = customProvider({
   languageModels: {
-    'chat-model-small': openai('gpt-4o-mini'),
-    'chat-model-large': openai('gpt-4o'),
+    "chat-model-small": google("gemini-1.5-flash"),
+    "chat-model-large": google('gemini-1.5-pro'),
     'chat-model-reasoning': wrapLanguageModel({
       model: fireworks('accounts/fireworks/models/deepseek-r1'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
-    'title-model': openai('gpt-4-turbo'),
-    'artifact-model': openai('gpt-4o-mini'),
+    'title-model': google('gemini-1.5-flash'),
+    'artifact-model': google('gemini-1.5-flash'),
   },
   imageModels: {
     'small-model': openai.image('dall-e-2'),
