@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { motion } from 'framer-motion';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
@@ -43,28 +45,43 @@ export default function Page() {
   };
 
   return (
-    <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl gap-12 flex flex-col">
-        <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
-          <h3 className="text-xl font-semibold dark:text-zinc-50">Sign Up</h3>
-          <p className="text-sm text-gray-500 dark:text-zinc-400">
-            Create an account with your email and password
-          </p>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#1e293b] to-[#0f172a]">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md p-8 rounded-2xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20"
+      >
+        <div className="flex flex-col items-center gap-4 text-center">
+          <Image
+            src="/images/AuroraAI Logo.png"
+            alt="AuroraAI Logo"
+            width={200}
+            height={200}
+            className="mb-4"
+          />
+          <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" fill="none" />
+              <circle cx="9" cy="10" r="1" fill="white" />
+              <circle cx="15" cy="10" r="1" fill="white" />
+              <path d="M9 15c1.5 2 4.5 2 6 0" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </motion.div>
+          <h3 className="text-2xl font-semibold text-white">Join AuroraAI</h3>
+          <p className="text-gray-300">Create an account to explore AI-powered assistance</p>
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful}>Sign Up</SubmitButton>
-          <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
+          <p className="text-center text-sm text-gray-300 mt-4">
             {'Already have an account? '}
-            <Link
-              href="/login"
-              className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
-            >
+            <Link href="/login" className="font-semibold text-white hover:underline">
               Sign in
             </Link>
             {' instead.'}
           </p>
         </AuthForm>
-      </div>
+      </motion.div>
     </div>
   );
 }
