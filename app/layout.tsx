@@ -6,28 +6,28 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://auroraai.vercel.app'),
-  title: "AuroraAI | Next.js-Powered AI Assistant",  
-  description: "Illuminate your ideas with AuroraAI—a modern, Next.js chatbot blending AI brilliance and Northern Lights elegance.",  
-  icons: {
+  metadataBase: new URL('https://synthara.vercel.app'),
+  title: "Synthara | AI-Powered Virtual Assistant",  
+  description: "Meet Synthara—an intelligent, Next.js-powered AI assistant designed for seamless conversations and smart automation.",  
+  /*icons: {
     icon: "/favicon.ico", // Path to your favicon
     shortcut: "/favicon.ico",
     apple: "/favicon.ico",
-  },
-  keywords: ["AI Assistant", "Next.js Chatbot", "Northern Lights AI", "Real-time AI", "Vercel", "React"],  
+  },*/
+  keywords: ["AI Assistant", "Next.js AI", "Synthara AI", "Smart Chatbot", "Real-time AI", "Vercel", "React"],  
   openGraph: {  
-    title: "AuroraAI: Conversations as Bright as the Aurora",  
-    description: "A Next.js 15 chatbot inspired by the Northern Lights—fast, intuitive, and endlessly helpful.",  
-    images: [{ url: "/opengraph-image.png" }], // Suggest aurora-themed visuals  
-    url: "https://auroraai.vercel.app"  
+    title: "Synthara: Your AI Assistant for Smarter Conversations",  
+    description: "Synthara is a powerful AI assistant built with Next.js 15, offering intuitive, real-time interactions for enhanced productivity.",  
+    images: [{ url: "/opengraph-image.png" }], // Suggest a sleek AI-themed visual  
+    url: "https://synthara.vercel.app"  
   },  
   twitter: {  
     card: "summary_large_image",  
-    title: "Meet AuroraAI: Your Luminous Next.js Assistant",  
-    description: "Powered by Next.js, glowing with intelligence. ✨",  
-    images: ["https://https://auroraai.vercel.app/twitter-image.png"]  
+    title: "Synthara: The AI Assistant for a Smarter Future",  
+    description: "AI-driven efficiency meets seamless interactions. Experience the future with Synthara.",  
+    images: ["https://synthara.vercel.app/twitter-image.png"]  
   },
-  themeColor: "#4f46e5", // Deep indigo (aurora-inspired)  
+  themeColor: "#0ea5e9", // A futuristic blue  
   viewport: "width=device-width, initial-scale=1"  
 };
 
@@ -63,10 +63,6 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      // `next-themes` injects an extra classname to the body element to avoid
-      // visual flicker before hydration. Hence the `suppressHydrationWarning`
-      // prop is necessary to avoid the React hydration mismatch warning.
-      // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
       suppressHydrationWarning
     >
       <head>
