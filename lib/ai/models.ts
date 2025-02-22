@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai';
+import { togetherai } from '@ai-sdk/togetherai';
 import { google } from '@ai-sdk/google';
 import { fireworks } from '@ai-sdk/fireworks';
 import {
@@ -21,8 +21,8 @@ export const myProvider = customProvider({
     'artifact-model': google('gemini-1.5-flash'),
   },
   imageModels: {
-    'small-model': openai.image('dall-e-2'),
-    'large-model': openai.image('dall-e-3'),
+    'small-model': togetherai.image('black-forest-labs/FLUX.1-schnell-Free'),
+    'large-model': togetherai.image('black-forest-labs/FLUX.1-schnell'),
   },
 });
 

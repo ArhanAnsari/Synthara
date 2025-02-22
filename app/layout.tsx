@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   title: "AuroraAI | Next.js-Powered AI Assistant",  
   description: "Illuminate your ideas with AuroraAI—a modern, Next.js chatbot blending AI brilliance and Northern Lights elegance.",  
   icons: {
-    icon: "./AuroraAI Logo.ico", // Path to your favicon
-    shortcut: "./AuroraAI Logo.ico",
-    apple: "./AuroraAI Logo.ico",
+    icon: "/favicon.ico", // Path to your favicon
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   keywords: ["AI Assistant", "Next.js Chatbot", "Northern Lights AI", "Real-time AI", "Vercel", "React"],  
   openGraph: {  
