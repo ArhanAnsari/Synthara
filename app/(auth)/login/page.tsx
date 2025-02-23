@@ -51,8 +51,8 @@ export default function Page() {
       >
         <div className="flex flex-col items-center gap-4 text-center">
           <Image
-            src="/images/Synthara.png"
-            alt="Synthara Logo"
+            src="/images/Synthara-Logo.png"
+            alt="Synthara-Logo"
             width={200}
             height={200}
             className="mb-4"
