@@ -246,7 +246,7 @@ export const LogoAnthropic = () => {
   );
 };
 
-export const LogoAuroraAI = ({ size = 48 }: { size?: number }) => {
+export const LogoSynthara = ({ size = 48 }: { size?: number }) => {
   return (
     <svg
       height={size}
@@ -260,11 +260,12 @@ export const LogoAuroraAI = ({ size = 48 }: { size?: number }) => {
       {/* Hexagonal Circuit Background */}
       <polygon points="50,10 150,10 190,100 150,190 50,190 10,100" fill="#0A192F" stroke="#0B72B9" strokeWidth="3"/>
       
-      {/* Inner Glowing Hexagon */}
+      {/* Inner Hexagon with Gradient */}
       <polygon points="70,50 130,50 160,100 130,150 70,150 40,100" fill="url(#glowGradient)" stroke="#0B72B9" strokeWidth="2"/>
       
-      {/* Central Letter A */}
-      <text x="95" y="115" fill="white" fontSize="40" fontFamily="Arial" fontWeight="bold" textAnchor="middle">A</text>
+      {/* Glowing Core with 'S' */}
+      <circle cx="100" cy="100" r="25" fill="url(#coreGlow)" />
+      <text x="100" y="110" fill="white" fontSize="30" fontFamily="Arial" fontWeight="bold" textAnchor="middle">S</text>
       
       {/* Circuit Lines */}
       <line x1="50" y1="10" x2="70" y2="50" stroke="#0B72B9" strokeWidth="2"/>
@@ -272,16 +273,21 @@ export const LogoAuroraAI = ({ size = 48 }: { size?: number }) => {
       <line x1="50" y1="190" x2="70" y2="150" stroke="#0B72B9" strokeWidth="2"/>
       <line x1="150" y1="190" x2="130" y2="150" stroke="#0B72B9" strokeWidth="2"/>
       
-      {/* Glow Effect */}
+      {/* Glow Effects */}
       <defs>
         <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#0B72B9" stopOpacity="1"/>
           <stop offset="100%" stopColor="#0B72B9" stopOpacity="0"/>
         </radialGradient>
+        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#A855F7" stopOpacity="1"/>
+          <stop offset="100%" stopColor="#A855F7" stopOpacity="0"/>
+        </radialGradient>
       </defs>
     </svg>
   );
 };
+
 
 export const RouteIcon = ({ size = 16 }: { size?: number }) => {
   return (

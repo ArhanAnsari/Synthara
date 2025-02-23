@@ -25,7 +25,7 @@ export default function VoiceChat() {
 
   return (
     <div className="p-6 bg-gray-900 text-white rounded-xl w-96 mx-auto">
-      <h2 className="text-lg font-semibold">🎙️ Voice Chat with Aurora AI</h2>
+      <h2 className="text-lg font-semibold">🎙️ Voice Chat with Synthara</h2>
 
       <button
         onClick={startListening}
@@ -44,7 +44,7 @@ export default function VoiceChat() {
       )}
 
       {response && (
-        <p className="mt-4 text-sm text-green-400">Aurora AI: {response}</p>
+        <p className="mt-4 text-sm text-green-400">Synthara: {response}</p>
       )}
     </div>
   );

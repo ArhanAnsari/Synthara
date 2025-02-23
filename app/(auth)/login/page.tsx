@@ -51,8 +51,8 @@ export default function Page() {
       >
         <div className="flex flex-col items-center gap-4 text-center">
           <Image
-            src="/images/AuroraAI Logo.png"
-            alt="AuroraAI Logo"
+            src="/images/Synthara.png"
+            alt="Synthara Logo"
             width={200}
             height={200}
             className="mb-4"
@@ -65,7 +65,7 @@ export default function Page() {
               <path d="M9 15c1.5 2 4.5 2 6 0" stroke="white" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </motion.div>
-          <h3 className="text-2xl font-semibold text-white">Welcome to AuroraAI</h3>
+          <h3 className="text-2xl font-semibold text-white">Welcome to Synthara</h3>
           <p className="text-gray-300">Sign in with your email and password</p>
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>

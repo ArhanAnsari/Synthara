@@ -6,26 +6,26 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://synthara.vercel.app'),
+  metadataBase: new URL('https://synthara.is-a.dev'),
   title: "Synthara | AI-Powered Virtual Assistant",  
   description: "Meet Synthara—an intelligent, Next.js-powered AI assistant designed for seamless conversations and smart automation.",  
-  /*icons: {
-    icon: "/favicon.ico", // Path to your favicon
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },*/
+  icons: {
+    icon: "/images/Synthara-Logo.png", // Path to your favicon
+    shortcut: "/images/Synthara-Logo.png",
+    apple: "/images/Synthara-Logo.png",
+  },
   keywords: ["AI Assistant", "Next.js AI", "Synthara AI", "Smart Chatbot", "Real-time AI", "Vercel", "React"],  
   openGraph: {  
     title: "Synthara: Your AI Assistant for Smarter Conversations",  
     description: "Synthara is a powerful AI assistant built with Next.js 15, offering intuitive, real-time interactions for enhanced productivity.",  
     images: [{ url: "/opengraph-image.png" }], // Suggest a sleek AI-themed visual  
-    url: "https://synthara.vercel.app"  
+    url: "https://synthara.is-a.dev"  
   },  
   twitter: {  
     card: "summary_large_image",  
     title: "Synthara: The AI Assistant for a Smarter Future",  
     description: "AI-driven efficiency meets seamless interactions. Experience the future with Synthara.",  
-    images: ["https://synthara.vercel.app/twitter-image.png"]  
+    images: ["https://synthara.is-a.dev/twitter-image.png"]  
   },
   themeColor: "#0ea5e9", // A futuristic blue  
   viewport: "width=device-width, initial-scale=1"  

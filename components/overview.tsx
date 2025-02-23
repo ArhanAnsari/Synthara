@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { LogoAuroraAI, MessageIcon } from './icons';
+import { LogoSynthara, MessageIcon } from './icons';
 
 export const Overview = () => {
   return (
@@ -14,19 +14,19 @@ export const Overview = () => {
     >
       <div className="rounded-xl p-6 flex flex-col gap-8 leading-relaxed text-center max-w-xl">
         <p className="flex flex-row justify-center gap-4 items-center">
-          <LogoAuroraAI size={40} />
+          <LogoSynthara size={40} />
           <span>+</span>
           <MessageIcon size={32} />
         </p>
-        <h2 className="text-2xl font-bold">Hi, I am AuroraAI! 🚀</h2>
+        <h2 className="text-2xl font-bold">Hi, I am Synthara! 🚀</h2>
         <p>
-          AuroraAI is your intelligent AI assistant, designed to help with
+          Synthara is your intelligent AI assistant, designed to help with
           coding, answering queries, and enhancing your workflow seamlessly.
-          Whether you're a developer, student, or tech enthusiast, AuroraAI
+          Whether you're a developer, student, or tech enthusiast, Synthara
           provides real-time assistance and valuable insights.
         </p>
         <p>
-          Powered by cutting-edge AI technology, AuroraAI ensures a
+          Powered by cutting-edge AI technology, Synthara ensures a
           fast, responsive, and interactive experience. It's built with modern
           web technologies to provide you with a smooth and efficient chat
           experience.
