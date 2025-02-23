@@ -274,53 +274,6 @@ function PureMultimodalInput({
   );
 }
 
-function VoiceInput({ setInput, submitForm }: { setInput: (value: string) => void, submitForm: () => void }) {
-  const [isRecording, setIsRecording] = useState(false);
-  const recognition = 
-  (window as any).SpeechRecognition || 
-  (window as any).webkitSpeechRecognition;
-
-
-  useEffect(() => {
-    if ("webkitSpeechRecognition" in window) {
-      recognition.current = new window.webkitSpeechRecognition();
-      recognition.current.continuous = false;
-      recognition.current.interimResults = false;
-      recognition.current.lang = "en-US";
-
-      recognition.current.onresult = (event: { results: { transcript: any; }[][]; }) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        submitForm(); // Auto-submit after recording
-      };
-
-      recognition.current.onerror = (event: any) => console.error("Voice input error:", event);
-    }
-  }, []);
-
-  const startRecording = () => {
-    if (recognition.current) {
-      recognition.current.start();
-      setIsRecording(true);
-    }
-  };
-
-  const stopRecording = () => {
-    if (recognition.current) {
-      recognition.current.stop();
-      setIsRecording(false);
-    }
-  };
-  return (
-    <Button 
-      onClick={isRecording ? stopRecording : startRecording} 
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
-    >
-      <MicIcon size={14} className={isRecording ? "text-red-500" : ""} />
-    </Button>
-  );
-}
-
 export const MultimodalInput = memo(
   PureMultimodalInput,
   (prevProps, nextProps) => {

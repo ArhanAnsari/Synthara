@@ -1,8 +1,11 @@
+// components/chat.tsx
 'use client';
 
 import type { Attachment, Message } from 'ai';
 import { useChat } from 'ai/react';
 import { useState, useEffect, useRef } from 'react';
+
+type SpeechRecognition = typeof window.SpeechRecognition | typeof window.webkitSpeechRecognition;
 import useSWR, { useSWRConfig } from 'swr';
 
 import { ChatHeader } from '@/components/chat-header';
@@ -36,6 +39,7 @@ export function Chat({
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [voiceModal, setVoiceModal] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
+  const [transcript, setTranscript] = useState('');
 
   const {
     messages,
@@ -74,14 +78,17 @@ export function Chat({
 
       if (SpeechRecognition) {
         recognitionRef.current = new SpeechRecognition();
-        recognitionRef.current.continuous = false;
-        recognitionRef.current.interimResults = false;
+        recognitionRef.current.continuous = true;
+        recognitionRef.current.interimResults = true;
         recognitionRef.current.lang = 'en-US';
 
         recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
-          const transcript = event.results[0][0].transcript;
-          setInput((prev) => prev + ' ' + transcript);
-          sendToGemini(transcript);
+          let finalTranscript = '';
+          for (let i = 0; i < event.results.length; i++) {
+            finalTranscript += event.results[i][0].transcript + ' ';
+          }
+          setTranscript(finalTranscript);
+          setInput(finalTranscript);
         };
 
         recognitionRef.current.onerror = () => {
@@ -95,10 +102,11 @@ export function Chat({
           toast.success(`🎤 Voice chat ended. Duration: ${duration} seconds`);
           setIsListening(false);
           setVoiceModal(false);
+          sendToGemini(transcript);
         };
       }
     }
-  }, [startTime]);
+  }, [startTime, transcript]);
 
   const toggleListening = () => {
     if (!recognitionRef.current) {
@@ -174,11 +182,11 @@ export function Chat({
               <button
                 type="button"
                 onClick={toggleListening}
-                className={`p-2 rounded-full transition ${
+                className={`p-3 rounded-full transition ${
                   isListening ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600'
                 }`}
               >
-                {isListening ? <MicOff size={24} /> : <Mic size={24} />}
+                {isListening ? <MicOff size={20} /> : <Mic size={20} />}
               </button>
             </>
           )}
@@ -218,6 +226,7 @@ export function Chat({
               className="w-20 h-20 bg-blue-500 rounded-full animate-ping"
               transition={{ repeat: Infinity, duration: 0.5 }}
             />
+            <p className="text-gray-500 text-sm">{transcript}</p>
           </motion.div>
         </div>
       )}

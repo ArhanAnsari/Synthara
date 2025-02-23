@@ -1,0 +1,58 @@
+.voice-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .chat-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #0b72b9;
+    border-radius: 30px;
+    padding: 8px;
+    background: #0a192f;
+  }
+  
+  .chat-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+  }
+  
+  .mic-btn {
+    background: #0b72b9;
+    border-radius: 50%;
+    padding: 8px;
+    border: none;
+  }
+  
+  .waveform {
+    display: flex;
+    justify-content: center; /* Center the bars */
+    align-items: flex-end;
+    height: 50px;
+  }
+  
+  .wave-bar {
+    width: 5px;
+    background: #0b72b9;
+  }
+  
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0b72b9;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
