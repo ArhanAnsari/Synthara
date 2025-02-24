@@ -11,6 +11,7 @@ import { useSidebar } from './ui/sidebar';
 import { memo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { VisibilityType, VisibilitySelector } from './visibility-selector';
+import ModeToggle from './ModeToggle';
 
 function PureChatHeader({
   chatId,
@@ -65,6 +66,7 @@ function PureChatHeader({
           className="order-1 md:order-3"
         />
       )}
+      <ModeToggle />
     </header>
   );
 }

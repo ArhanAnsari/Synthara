@@ -43,8 +43,6 @@ export function SidebarUserNav({ user }: { user: User }) {
             side="top"
             className="w-[--radix-popper-anchor-width]"
           >
-            <ModeToggle />
-            <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <button
                 type="button"
