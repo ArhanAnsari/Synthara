@@ -3,7 +3,7 @@
 
 import type { Attachment, Message } from 'ai';
 import { useChat } from 'ai/react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 type SpeechRecognition = typeof window.SpeechRecognition | typeof window.webkitSpeechRecognition;
 import useSWR, { useSWRConfig } from 'swr';
@@ -20,6 +20,7 @@ import { useArtifactSelector } from '@/hooks/use-artifact';
 import { toast } from 'sonner';
 import { Mic, MicOff, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { debounce } from 'lodash';
 
 export function Chat({
   id,
@@ -75,28 +76,30 @@ export function Chat({
     if (typeof window !== 'undefined') {
       const SpeechRecognition =
         (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
+  
       if (SpeechRecognition) {
         recognitionRef.current = new SpeechRecognition();
         recognitionRef.current.continuous = true;
         recognitionRef.current.interimResults = true;
         recognitionRef.current.lang = 'en-US';
-
-        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
-          let finalTranscript = '';
-          for (let i = 0; i < event.results.length; i++) {
-            finalTranscript += event.results[i][0].transcript + ' ';
-          }
-          setTranscript(finalTranscript);
-          setInput(finalTranscript);
-        };
-
+  
+        if (recognitionRef.current) {
+          recognitionRef.current.onresult = debounce((event: SpeechRecognitionEvent) => {
+            let finalTranscript = '';
+            for (let i = 0; i < event.results.length; i++) {
+              finalTranscript += event.results[i][0].transcript + ' ';
+            }
+            setTranscript(finalTranscript);
+            setInput(finalTranscript);
+          }, 500); // Adjust debounce time as needed
+        }
+  
         recognitionRef.current.onerror = () => {
           toast.error('Voice recognition error!');
           setIsListening(false);
           setVoiceModal(false);
         };
-
+  
         recognitionRef.current.onend = () => {
           const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
           toast.success(`🎤 Voice chat ended. Duration: ${duration} seconds`);
@@ -106,14 +109,19 @@ export function Chat({
         };
       }
     }
+  
+    return () => {
+      recognitionRef.current?.stop(); // Cleanup on unmount
+    };
   }, [startTime, transcript]);
+  
 
-  const toggleListening = () => {
+  const toggleListening = useCallback(() => {
     if (!recognitionRef.current) {
       toast.error('Speech recognition is not supported in this browser.');
       return;
     }
-
+  
     if (isListening) {
       recognitionRef.current.stop();
       setIsListening(false);
@@ -124,7 +132,7 @@ export function Chat({
       setStartTime(Date.now());
       setVoiceModal(true);
     }
-  };
+  }, [isListening]);  
 
   const sendToGemini = async (query: string) => {
     try {
@@ -133,13 +141,17 @@ export function Chat({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: query }),
       });
-
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
       const data = await response.json();
       append({ role: 'assistant', content: data.reply });
     } catch (error) {
-      toast.error('Gemini AI response failed.');
+      toast.error('Gemini AI response failed. ' + (error as Error).message);
     }
-  };
+  };  
 
   return (
     <>
