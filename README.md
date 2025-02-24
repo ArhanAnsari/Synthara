@@ -8,6 +8,10 @@ Synthara is an advanced AI-powered application designed to process and generate 
 - **Multi-File Format Support (Upcoming)**: Plan to extend support for documents (PDF, DOCX), audio files (MP3, WAV), and videos (MP4, AVI).
 - **Real-time Processing**: Get instant results with efficient processing techniques.
 - **User-Friendly Interface**: Simplified UI for ease of use and accessibility.
+- **Intelligent Query Handling**: Understands and processes user queries to provide accurate and relevant answers.
+- **Task Automation**: Automates routine tasks to save time and reduce manual effort.
+- **Seamless Integration**: Easily integrates with various platforms and services to provide a unified user experience.
+
 
 ## Installation
 
