@@ -12,9 +12,9 @@ const FileSchema = z.object({
       message: 'File size should be less than 5MB',
     })
     // Update the file type based on the kind of files you want to accept
-    .refine((file) => ['image/jpeg', 'image/png'].includes(file.type), {
-      message: 'File type should be JPEG or PNG',
-    }),
+    .refine((file) => ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'video/mp4', 'video/mpeg', 'video/quicktime', 'audio/mpeg', 'audio/ogg', 'audio/wav'].includes(file.type), {
+      message: 'File type should be JPEG, PNG, JPG, PDF, DOC, DOCX, MP4, MPEG, Quicktime, MP3, OGG or WAV',
+    })
 });
 
 export async function POST(request: Request) {
