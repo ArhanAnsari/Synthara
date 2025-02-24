@@ -11,8 +11,8 @@ export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
 
 export const myProvider = customProvider({
   languageModels: {
-    "chat-model-small": google("gemini-1.5-flash"),
-    "chat-model-large": google('gemini-1.5-pro'),
+    "chat-model-small": google("gemini-1.5-pro"),
+    "chat-model-large": google('gemini-1.5-flash'),
     'chat-model-reasoning': wrapLanguageModel({
       model: fireworks('accounts/fireworks/models/deepseek-r1'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
