@@ -270,6 +270,11 @@ function PureMultimodalInput({
           />
         )}
       </div>
+      <div className="absolute bottom-0 left-12 p-3 w-fit flex flex-row justify-end">
+        <p className="text-sm text-gray-500 justify-centre">
+          Synthara can make mistakes, please double check for accuracy
+        </p>
+    </div>
     </div>
   );
 }
