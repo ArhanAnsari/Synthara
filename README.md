@@ -11,7 +11,7 @@ Synthara is an advanced AI-powered application designed to process and generate 
 - **Intelligent Query Handling**: Understands and processes user queries to provide accurate and relevant answers.
 - **Task Automation**: Automates routine tasks to save time and reduce manual effort.
 - **Seamless Integration**: Easily integrates with various platforms and services to provide a unified user experience.
-
+- **Dark Mode**: Easily switch b/w Light and Dark Mode
 
 ## Installation
 
