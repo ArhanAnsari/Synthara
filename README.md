@@ -1,17 +1,17 @@
 # Synthara – Your Smart AI Assistant
 
-Synthara is an advanced AI-powered application designed to process and generate insights from various types of files. Initially focused on image processing, Synthara aims to expand support for multiple file formats, including documents, audio, and video files.
+Synthara is an advanced AI-powered application designed to process and generate insights from various types of files. Initially focused on image processing, Synthara now supports multiple file formats, including documents, audio, and video files. It can analyze uploaded content and provide accurate answers based on it.
 
 ## Features
 
 - **AI-Powered Image Processing**: Extract meaningful insights from images using advanced AI models.
-- **Multi-File Format Support (Upcoming)**: Plan to extend support for documents (PDF, DOCX), audio files (MP3, WAV), and videos (MP4, AVI).
+- **Multi-File Format Support**: Analyze documents (PDF, DOCX), audio files (MP3, WAV), and videos (MP4, AVI).
 - **Real-time Processing**: Get instant results with efficient processing techniques.
 - **User-Friendly Interface**: Simplified UI for ease of use and accessibility.
 - **Intelligent Query Handling**: Understands and processes user queries to provide accurate and relevant answers.
 - **Task Automation**: Automates routine tasks to save time and reduce manual effort.
 - **Seamless Integration**: Easily integrates with various platforms and services to provide a unified user experience.
-- **Dark Mode**: Easily switch b/w Light and Dark Mode
+- **Dark Mode**: Easily switch b/w Light and Dark Mode.
 
 ## Installation
 
@@ -32,22 +32,6 @@ npm install
 # Run the application
 npm run dev
 ```
-
-## Expanding File Support
-
-To support additional file types, follow these steps:
-
-### 1. **Documents (PDF, DOCX)**
-- Use libraries like `pdfplumber` (for PDFs) and `python-docx` (for Word documents).
-- Implement text extraction functions to analyze and summarize content.
-
-### 2. **Audio Files (MP3, WAV)**
-- Use `pydub` or `speechrecognition` to transcribe audio to text.
-- Apply AI models for sentiment analysis or keyword extraction.
-
-### 3. **Video Files (MP4, AVI)**
-- Use `moviepy` or `OpenCV` to process video frames.
-- Implement object detection and audio-to-text transcription.
 
 ## Contributing
 
