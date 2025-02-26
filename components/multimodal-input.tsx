@@ -22,14 +22,34 @@ import { toast } from 'sonner';
 import { useLocalStorage, useWindowSize } from 'usehooks-ts';
 
 import { sanitizeUIMessages } from '@/lib/utils';
+type SpeechRecognition = typeof window.SpeechRecognition | typeof window.webkitSpeechRecognition;
 
 import { ArrowUpIcon, PaperclipIcon, StopIcon } from './icons';
-import { MicIcon } from 'lucide-react';
+import { Mic, MicOff, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { debounce } from 'lodash'
 import { PreviewAttachment } from './preview-attachment';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { SuggestedActions } from './suggested-actions';
 import equal from 'fast-deep-equal';
+
+function VoiceChat({ isListening, startListening, stopListening }: { isListening: boolean; startListening: () => void; stopListening: () => void; }) {
+  return (
+    // <Button className="absolute bottom-0 left-16 p-2" onClick={isListening ? stopListening : startListening}>
+    //   {isListening ? <MicOff /> : <Mic />}
+    // </Button>
+    <Button
+    type="button"
+    onClick={isListening ? stopListening : startListening}
+    className={`p-3 rounded-full transition ${
+      isListening ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600'
+    }`}
+  >
+    {isListening ? <MicOff size={20} /> : <Mic size={20} />}
+  </Button>
+  );
+}
 
 function PureMultimodalInput({
   chatId,
@@ -68,6 +88,101 @@ function PureMultimodalInput({
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
+
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const [voiceModal, setVoiceModal] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [transcript, setTranscript] = useState('');
+
+ // Voice Recognition Setup
+ useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = 'en-US';
+
+      if (recognitionRef.current) {
+        recognitionRef.current.onresult = debounce((event: SpeechRecognitionEvent) => {
+          let finalTranscript = '';
+          for (let i = 0; i < event.results.length; i++) {
+            finalTranscript += event.results[i][0].transcript + ' ';
+          }
+          setTranscript(finalTranscript);
+          setInput(finalTranscript);
+        }, 500); // Adjust debounce time as needed
+      }
+
+      recognitionRef.current.onerror = () => {
+        toast.error('Voice recognition error!');
+        setIsListening(false);
+        setVoiceModal(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
+        toast.success(`🎤 Voice chat ended. Duration: ${duration} seconds`);
+        setIsListening(false);
+        setVoiceModal(false);
+        sendToGemini(transcript);
+      };
+    }
+  }
+
+  return () => {
+    recognitionRef.current?.stop(); // Cleanup on unmount
+  };
+}, [startTime, transcript]);
+
+
+const toggleListening = useCallback(() => {
+  if (!recognitionRef.current) {
+    toast.error('Speech recognition is not supported in this browser.');
+    return;
+  }
+
+  if (isListening) {
+    recognitionRef.current.stop();
+    setIsListening(false);
+    setVoiceModal(false);
+  } else {
+    recognitionRef.current.start();
+    setIsListening(true);
+    setStartTime(Date.now());
+    setVoiceModal(true);
+  }
+}, [isListening]);  
+
+const stopListening = useCallback(() => {
+  recognitionRef.current?.stop();
+  setIsListening(false);
+  setVoiceModal(false);
+}
+, [recognitionRef]);
+
+const sendToGemini = async (query: string) => {
+  try {
+    const response = await fetch('/api/gemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: query }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    append({ role: 'assistant', content: data.reply });
+  } catch (error) {
+    toast.error('Gemini AI response failed. ' + (error as Error).message);
+  }
+};  
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -259,6 +374,11 @@ function PureMultimodalInput({
         <AttachmentsButton fileInputRef={fileInputRef} isLoading={isLoading} />
       </div>
 
+
+      <div className="absolute bottom-0 right-12 p-2 w-fit flex flex-row justify-end">
+      <VoiceChat isListening={isListening} startListening={toggleListening} stopListening={stopListening} />
+      </div>
+      
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
         {isLoading ? (
           <StopButton stop={stop} setMessages={setMessages} />

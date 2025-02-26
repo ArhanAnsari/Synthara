@@ -191,7 +191,7 @@ export function Chat({
                 append={append}
               />
               {/* Mic Button for Voice Input */}
-              <button
+              {/* <button
                 type="button"
                 onClick={toggleListening}
                 className={`p-3 rounded-full transition ${
@@ -199,7 +199,7 @@ export function Chat({
                 }`}
               >
                 {isListening ? <MicOff size={20} /> : <Mic size={20} />}
-              </button>
+              </button> */}
             </>
           )}
         </form>
