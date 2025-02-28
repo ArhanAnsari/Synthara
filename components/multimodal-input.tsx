@@ -392,7 +392,7 @@ const sendToGemini = async (query: string) => {
       </div>
       <div className="absolute bottom-0 left-10 p-1 w-fit flex flex-row justify-end">
         <p className="text-sm text-gray-500 justify-centre">
-          Synthara can make mistakes, please double check for accuracy
+          Synthara can make mistakes.
         </p>
     </div>
     </div>
