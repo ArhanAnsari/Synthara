@@ -14,7 +14,7 @@ export const myProvider = customProvider({
     "chat-model-small": google("gemini-1.5-pro"),
     "chat-model-large": google('gemini-1.5-flash'),
     'chat-model-reasoning': wrapLanguageModel({
-      model: fireworks('accounts/fireworks/models/deepseek-r1'),
+      model: togetherai('deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
     'title-model': google('gemini-1.5-flash'),
